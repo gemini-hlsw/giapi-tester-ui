@@ -2,12 +2,7 @@
 
 import { useWebSocket } from "@/context/websocket/WebSocketContext"
 import { WebSocketProvider } from "@/context/websocket/WebSocketProvider"
-import {
-  INITITAL_ISD_STATE,
-  isdState,
-  SCRIPT_OPTIONS,
-  STATE_OPTIONS,
-} from "@/helpers/state"
+import { INITITAL_ISD_STATE, isdState, STATE_OPTIONS } from "@/helpers/state"
 import { IsdId } from "@/types"
 import { useEffect, useReducer } from "react"
 import {
@@ -38,33 +33,22 @@ export default function Home() {
   if (!ws || !state || Object.keys(state).length === 0)
     return <div>Loading...</div>
 
-  function handleChange(key: IsdId, value: number, type?: string) {
-    if (value !== undefined && value !== null && value !== state[key]) {
-      fetch("/api/state", {
+  function handleChange(name: string) {
+    if (name !== undefined) {
+      fetch("/api/scripts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ key, value, type }),
+        body: JSON.stringify({ script_name: name }),
       })
     }
-  }
-
-  function handleScript(id: string) {
-    fetch("/api/script", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    })
   }
 
   return (
     <WebSocketProvider>
       <main>
-        <h1 className="text-2xl">ISD STATE</h1>
-        <div className="grid grid-cols-10">
+        <div className="grid grid-cols-6">
           {Object.keys(state).map((key) => {
             const option = STATE_OPTIONS.find((o) => o.name === key)
             if (!option) return null
@@ -126,20 +110,6 @@ export default function Home() {
             }
           })}
         </div>
-
-        <h1 className="text-2xl mt-4">SCRIPTS</h1>
-        <ul className="flex flex-col mx-2">
-          {SCRIPT_OPTIONS.map((script) => (
-            <li key={script.id}>
-              <button
-                className="p-2 border rounded mb-2 text-center cursor-pointer hover:bg-white/10 w-full"
-                onClick={() => handleScript(script.id)}
-              >
-                {script.name}
-              </button>
-            </li>
-          ))}
-        </ul>
       </main>
     </WebSocketProvider>
   )

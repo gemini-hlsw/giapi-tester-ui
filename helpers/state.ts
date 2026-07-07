@@ -168,15 +168,15 @@ export const STATE_OPTIONS = [
   },
   {
     name: "obs_time_left",
-    ref: "SCO:IS.obs.obs_time_left",
+    ref: "SCO:IS:obs.timeLeft",
     type: "integer",
-    options: [0, 1],
+    options: [0, 5, 10, 15, 20],
   },
   {
     name: "obs_time_total",
-    ref: "SCO:IS.obs.obs_time_total",
+    ref: "SCO:IS:obs.timeTotal",
     type: "integer",
-    options: [0, 1],
+    options: [0, 5, 10, 15, 20],
   },
   {
     name: "detg_temp",
@@ -405,15 +405,21 @@ export const STATE_OPTIONS = [
     name: "detgr_health",
     ref: "SCO:DC:VIS_gr.health",
     type: "integer",
-    options: [0, 1],
+    options: [0, 1, 2, 3],
   },
   {
     name: "detzi_health",
     ref: "SCO:DC:VIS_zi.health",
     type: "integer",
-    options: [0, 1],
+    options: [0, 1, 2, 3],
   },
   { name: "obs_data_label", ref: "", type: "integer", options: [0, 1] },
   { name: "obs_state", ref: "", type: "integer", options: [0, 1] },
   { name: "obs_type", ref: "", type: "integer", options: [0, 1] },
+]
+
+export const SCRIPT_OPTIONS = [
+  { name: "Rotate ADC", id: "adcRotate" },
+  { name: "Observation Example", id: "observationExample" },
+  { name: "yet_another_script", id: "yetAnotherScript" },
 ]
