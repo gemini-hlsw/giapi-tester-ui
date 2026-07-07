@@ -1,4 +1,4 @@
-import { adcRotate, observationExample } from "./scripts"
+import { adcRotate, observationExample, spectrumExample } from "./scripts"
 
 export async function POST(request: Request) {
   const { id } = await request.json()
@@ -18,6 +18,9 @@ export async function POST(request: Request) {
         break
       case "observationExample":
         await observationExample()
+        break
+      case "spectrumExample":
+        await spectrumExample()
         break
       default:
         return new Response("Script not found", { status: 404 })

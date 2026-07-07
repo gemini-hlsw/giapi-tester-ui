@@ -312,15 +312,15 @@ export const STATE_OPTIONS = [
   },
   {
     name: "obs_mode",
-    ref: "SCO:IS.obs.obs_mode",
+    ref: "SCO:IS:obs.mode",
     type: "integer",
-    options: [0, 1],
+    options: [0, 1, 2],
   },
   {
     name: "obs_strategy",
-    ref: "SCO:IS.obs.obs_strategy",
+    ref: "SCO:IS:obs.strategy",
     type: "integer",
-    options: [0, 1],
+    options: [0, 1, 2],
   },
   { name: "scorpio_health", ref: "", type: "integer", options: [0, 1] },
   {
@@ -421,5 +421,5 @@ export const STATE_OPTIONS = [
 export const SCRIPT_OPTIONS = [
   { name: "Rotate ADC", id: "adcRotate" },
   { name: "Observation Example", id: "observationExample" },
-  { name: "yet_another_script", id: "yetAnotherScript" },
+  { name: "Spectrum Example", id: "spectrumExample" },
 ]

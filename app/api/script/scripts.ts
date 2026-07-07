@@ -28,29 +28,82 @@ export async function resetState() {
 export async function observationExample() {
   await resetState()
 
-  await wait(1000) // Wait for 1 second
+  await wait(1000)
   await setGiapiState("adc_fov", 1, "integer")
 
-  await wait(1000) // Wait for 1 second
+  await wait(200)
   await setGiapiState("cover_state", 1, "integer")
 
-  await wait(1000) // Wait for 1 second
+  await wait(100)
   await setGiapiState("adc_control", 0, "integer")
 
-  await wait(1000) // Wait for 1 second
+  await wait(100)
   await setGiapiState("obs_strategy", 2, "integer")
+  await setGiapiState("obs_mode", 1, "integer")
 
-  await wait(1000) // Wait for 1 second
+  await wait(100)
   await setGiapiState("shutter_g", 1, "integer")
   await setGiapiState("shutter_r", 1, "integer")
   await setGiapiState("detgr_health", 3, "integer")
 
-  await wait(1000) // Wait for 1 second
+  await wait(100)
   await setGiapiState("obs_time_total", 10, "integer")
 
-  await wait(100) // Wait for 1 second
+  await wait(100)
   for (let i = 10; i >= 0; i--) {
     await setGiapiState("obs_time_left", i, "integer")
-    await wait(400) // Wait for 1 second
+    await wait(400)
   }
+
+  await setGiapiState("shutter_g", 0, "integer")
+  await setGiapiState("shutter_r", 0, "integer")
+  await setGiapiState("detgr_health", 0, "integer")
+}
+
+export async function spectrumExample() {
+  await resetState()
+
+  await wait(1000)
+  await setGiapiState("adc_fov", 0, "integer")
+
+  await wait(1000)
+  await setGiapiState("cover_state", 1, "integer")
+
+  await wait(200)
+  await setGiapiState("adc_control", 1, "integer")
+
+  await setGiapiState("adc_pos_diff", 80, "double")
+  await setGiapiState("adc_pos_joint", -80, "double")
+
+  await wait(100)
+  await setGiapiState("obs_strategy", 1, "integer")
+  await setGiapiState("obs_mode", 2, "integer")
+
+  await wait(100)
+  await setGiapiState("vph_gr_grism", 1, "integer")
+  await setGiapiState("vph_zi_grism", 1, "integer")
+
+  await wait(100)
+  await setGiapiState("detgr_health", 3, "integer")
+  await setGiapiState("detzi_health", 3, "integer")
+  await setGiapiState("shutter_g", 1, "integer")
+  await setGiapiState("shutter_r", 1, "integer")
+  await setGiapiState("shutter_i", 1, "integer")
+  await setGiapiState("shutter_z", 1, "integer")
+
+  await wait(100)
+  await setGiapiState("obs_time_total", 10, "integer")
+
+  await wait(100)
+  for (let i = 10; i >= 0; i--) {
+    await setGiapiState("obs_time_left", i, "integer")
+    await wait(400)
+  }
+
+  await setGiapiState("shutter_g", 0, "integer")
+  await setGiapiState("shutter_r", 0, "integer")
+  await setGiapiState("shutter_i", 0, "integer")
+  await setGiapiState("shutter_z", 0, "integer")
+  await setGiapiState("detgr_health", 0, "integer")
+  await setGiapiState("detzi_health", 0, "integer")
 }
